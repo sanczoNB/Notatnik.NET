@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Notatnik.NET
@@ -15,6 +8,35 @@ namespace Notatnik.NET
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void zamknijToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+            //Application.Exit(); drugi sposób 
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Czy zapisać zmiany w edytowanym dokumencie ?",
+                this.Text,
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button3);
+            switch (dr)
+            {
+                case DialogResult.Yes:
+                    MessageBox.Show("Wstawić wywołanie metody zapisującej zawartość notatnika do pliku");
+                    break;
+                case DialogResult.No:
+                    break;
+                case DialogResult.Cancel:
+                    e.Cancel = true;
+                    break;
+                default:
+                    e.Cancel = true;
+                    break;
+            }
         }
     }
 }
