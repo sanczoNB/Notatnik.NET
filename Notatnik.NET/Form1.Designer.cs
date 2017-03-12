@@ -30,8 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otwórzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,8 +46,11 @@
             this.czcionkaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tłoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasekstanuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip1.SuspendLayout();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -61,23 +62,6 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox1.Size = new System.Drawing.Size(284, 238);
             this.textBox1.TabIndex = 0;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 237);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(284, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(59, 22);
-            this.toolStripLabel1.Text = "brak pliku";
             // 
             // menuStrip1
             // 
@@ -107,6 +91,7 @@
             this.otwórzToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.otwórzToolStripMenuItem.Text = "&Otwórz";
+            this.otwórzToolStripMenuItem.Click += new System.EventHandler(this.otwórzToolStripMenuItem_Click);
             // 
             // zapiszJakoToolStripMenuItem
             // 
@@ -184,27 +169,54 @@
             // czcionkaToolStripMenuItem
             // 
             this.czcionkaToolStripMenuItem.Name = "czcionkaToolStripMenuItem";
-            this.czcionkaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.czcionkaToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.czcionkaToolStripMenuItem.Text = "&Czcionka";
             // 
             // tłoToolStripMenuItem
             // 
             this.tłoToolStripMenuItem.Name = "tłoToolStripMenuItem";
-            this.tłoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tłoToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.tłoToolStripMenuItem.Text = "&Tło";
             // 
             // pasekstanuToolStripMenuItem
             // 
+            this.pasekstanuToolStripMenuItem.Checked = true;
+            this.pasekstanuToolStripMenuItem.CheckOnClick = true;
+            this.pasekstanuToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.pasekstanuToolStripMenuItem.Name = "pasekstanuToolStripMenuItem";
-            this.pasekstanuToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasekstanuToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.pasekstanuToolStripMenuItem.Text = "Pasek &stanu";
+            this.pasekstanuToolStripMenuItem.Click += new System.EventHandler(this.pasekstanuToolStripMenuItem_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 240);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(284, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(59, 17);
+            this.toolStripStatusLabel1.Text = "brak pliku";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.DefaultExt = "txt";
+            this.openFileDialog1.Filter = "all|*|Piliki tekstowe |*.txt|Pliki INI|*.ini";
+            this.openFileDialog1.InitialDirectory = ".";
+            this.openFileDialog1.Title = "Wczytaj plik";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -212,10 +224,10 @@
             this.Name = "Form1";
             this.Text = "Notatnik.NET";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,8 +236,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem plikToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem otwórzToolStripMenuItem;
@@ -242,6 +252,9 @@
         private System.Windows.Forms.ToolStripMenuItem czcionkaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tłoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasekstanuToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        public System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Notatnik.NET
@@ -8,6 +10,31 @@ namespace Notatnik.NET
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public static string[] ReadTextFile(string fileName)
+        {
+            var text = new List<string>();
+            try
+            {
+                using (var sr = new StreamReader(fileName))
+                {
+                    string row;
+                    while ((row = sr.ReadLine()) != null)
+                    {
+                        text.Add(row);
+                    }
+                }
+                return text.ToArray();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Błąd odczytu pliku  {fileName} \nOpis wyjątku: {e.Message}", 
+                    "Notatnik.NET - Błąd przy wczytywaniu pliku",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return null;
+            }
         }
 
         private void zamknijToolStripMenuItem_Click(object sender, EventArgs e)
@@ -36,6 +63,22 @@ namespace Notatnik.NET
                 default:
                     e.Cancel = true;
                     break;
+            }
+        }
+
+        private void pasekstanuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            statusStrip1.Visible = pasekstanuToolStripMenuItem.Checked;
+        }
+
+        private void otwórzToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                var fileName = openFileDialog1.FileName;
+                textBox1.Lines = ReadTextFile(fileName);
+                int lastSlah = fileName.LastIndexOf('\\');
+                toolStripStatusLabel1.Text = fileName.Substring(lastSlah + 1);
             }
         }
     }
